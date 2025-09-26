@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
 @Configuration(proxyBeanMethods = false)
 @EnableMethodSecurity
@@ -24,7 +25,7 @@ public class SecurityConfig {
             .headers(headers -> headers
                 .contentSecurityPolicy(csp -> csp.policyDirectives("default-src 'none'; frame-ancestors 'none'; base-uri 'none'"))
                 .referrerPolicy(ref -> ref.policy(org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.NO_REFERRER))
-                .xssProtection(x -> x.block(true))
+                .xssProtection(xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK))
                 .httpStrictTransportSecurity(hsts -> hsts.includeSubDomains(true).preload(true))
                 .frameOptions(frame -> frame.deny())
             )

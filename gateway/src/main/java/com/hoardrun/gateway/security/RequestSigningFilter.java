@@ -38,7 +38,7 @@ public class RequestSigningFilter implements WebFilter {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         }
-        String payload = exchange.getRequest().getMethodValue() + "\n" + exchange.getRequest().getURI().getPath() + "\n" + ts + "\n" + sharedSecret;
+        String payload = exchange.getRequest().getMethod().name() + "\n" + exchange.getRequest().getURI().getPath() + "\n" + ts + "\n" + sharedSecret;
         String expected = DigestUtils.appendMd5DigestAsHex(payload.getBytes(StandardCharsets.UTF_8), new StringBuilder()).toString();
         if (!expected.equalsIgnoreCase(signature)) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);

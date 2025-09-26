@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: transaction-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret: c2VjdXJlLXN1cGVyLXNlY3JldC1kZW1vLXNob3VsZC1iZS0zMi1ieXRlcy1vci1sb25nZXI=
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hoardrun_tx
+    username: tx_user
+    password: changeMe
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
