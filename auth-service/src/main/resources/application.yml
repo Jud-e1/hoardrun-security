@@ -1,0 +1,49 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: change-me
+            client-secret: change-me
+            scope: openid, profile, email
+        provider:
+          google:
+            issuer-uri: https://accounts.google.com
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hoardrun_auth
+    username: auth_user
+    password: changeMe
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: redis
+      port: 6379
+
+security:
+  jwt:
+    hmac:
+      secret: c2VjdXJlLXN1cGVyLXNlY3JldC1kZW1vLXNob3VsZC1iZS0zMi1ieXRlcy1vci1sb25nZXI=
+      access-ttl-seconds: 900
+      refresh-ttl-seconds: 2592000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+

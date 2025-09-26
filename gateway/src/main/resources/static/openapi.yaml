@@ -1,0 +1,40 @@
+openapi: 3.0.3
+info:
+  title: Hoardrun API Gateway
+  version: 1.0.0
+  description: Static documentation of routed endpoints. See service Swagger UIs for schemas.
+servers:
+  - url: http://localhost:8080
+paths:
+  /auth/register:
+    post:
+      summary: Register user (proxied to auth-service)
+      responses:
+        '200': { description: Registered }
+  /auth/login:
+    post:
+      summary: Login and obtain tokens (proxied to auth-service)
+      responses:
+        '200': { description: Tokens issued }
+  /auth/mfa/setup:
+    post:
+      summary: Start TOTP setup (proxied to auth-service)
+      responses:
+        '200': { description: Secret and otpauth URI }
+  /auth/mfa/verify:
+    post:
+      summary: Verify TOTP and enable MFA (proxied to auth-service)
+      responses:
+        '200': { description: MFA enabled }
+  /api/tx/status:
+    get:
+      summary: Transaction service health/status (JWT required)
+      responses:
+        '200': { description: OK }
+  /api/tx/submit:
+    post:
+      summary: Submit transaction; MFA required for amount > 1000
+      responses:
+        '200': { description: Accepted or MFA required }
+
+
