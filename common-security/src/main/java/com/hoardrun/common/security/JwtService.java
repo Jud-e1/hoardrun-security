@@ -38,7 +38,7 @@ public class JwtService {
     }
 
     public Jws<Claims> parseAndValidate(String jwt) {
-        return Jwts.parserBuilder().setSigningKey(signingKey).build().parseClaimsJws(jwt);
+        return Jwts.parser().setSigningKey(signingKey).build().parseClaimsJws(jwt);
     }
 }
 

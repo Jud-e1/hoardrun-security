@@ -1,0 +1,4 @@
+com/hoardrun/common/security/JwtService.class
+com/hoardrun/common/audit/AuditClient.class
+com/hoardrun/common/security/CommonSecurityAutoConfiguration.class
+com/hoardrun/common/web/GlobalExceptionHandler.class
