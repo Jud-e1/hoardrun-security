@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">transaction-service</a> &gt; <a href="index.source.html" class="el_package">com.hoardrun.transaction.web</a> &gt; <span class="el_source">TransactionController.java</span></div><h1>TransactionController.java</h1><pre class="source lang-java linenums">package com.hoardrun.transaction.web;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import com.hoardrun.common.audit.AuditClient;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+
+@RestController
+@RequestMapping(&quot;/api/tx&quot;)
+public class TransactionController {
+    private final AuditClient auditClient;
+
+<span class="fc" id="L20">    public TransactionController(AuditClient auditClient) {</span>
+<span class="fc" id="L21">        this.auditClient = auditClient;</span>
+<span class="fc" id="L22">    }</span>
+
+    @GetMapping(&quot;/status&quot;)
+    @PreAuthorize(&quot;hasAuthority('SCOPE_transactions:read') or hasRole('USER')&quot;)
+    public Map&lt;String, Object&gt; status() {
+<span class="fc" id="L27">        return Map.of(&quot;status&quot;, &quot;ok&quot;);</span>
+    }
+
+<span class="fc" id="L30">    public record TxRequest(@jakarta.validation.constraints.Positive(message = &quot;amount must be positive&quot;) double amount) {}</span>
+
+    @PostMapping(&quot;/submit&quot;)
+    @PreAuthorize(&quot;hasRole('USER')&quot;)
+    public Map&lt;String, Object&gt; submit(@jakarta.validation.Valid @RequestBody TxRequest req, @AuthenticationPrincipal Jwt jwt) {
+<span class="fc" id="L35">        boolean mfaVerified = Boolean.TRUE.equals(jwt.getClaim(&quot;mfa_verified&quot;));</span>
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        if (req.amount() &gt; 1000 &amp;&amp; !mfaVerified) {</span>
+<span class="fc" id="L37">            auditClient.emit(&quot;TX_MFA_REQUIRED&quot;, jwt.getSubject(), &quot;{\&quot;amount\&quot;:&quot; + req.amount() + &quot;}&quot;);</span>
+<span class="fc" id="L38">            return Map.of(&quot;status&quot;, &quot;mfa_required&quot;, &quot;message&quot;, &quot;2FA required for high-value transactions&quot;);</span>
+        }
+<span class="fc" id="L40">        auditClient.emit(&quot;TX_ACCEPTED&quot;, jwt.getSubject(), &quot;{\&quot;amount\&quot;:&quot; + req.amount() + &quot;}&quot;);</span>
+<span class="fc" id="L41">        return Map.of(&quot;status&quot;, &quot;accepted&quot;, &quot;amount&quot;, req.amount());</span>
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

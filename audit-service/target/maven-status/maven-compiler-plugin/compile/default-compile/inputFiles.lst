@@ -1,0 +1,7 @@
+/app/audit-service/src/main/java/com/hoardrun/audit/AuditServiceApplication.java
+/app/audit-service/src/main/java/com/hoardrun/audit/config/JwtConfig.java
+/app/audit-service/src/main/java/com/hoardrun/audit/config/SecurityConfig.java
+/app/audit-service/src/main/java/com/hoardrun/audit/domain/AuditEvent.java
+/app/audit-service/src/main/java/com/hoardrun/audit/repo/AuditEventRepository.java
+/app/audit-service/src/main/java/com/hoardrun/audit/web/AuditController.java
+/app/audit-service/src/main/java/com/hoardrun/audit/web/AuditIngestController.java

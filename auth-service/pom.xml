@@ -80,8 +80,8 @@
         </dependency>
         <dependency>
             <groupId>com.eatthepath</groupId>
-            <artifactId>otp-java</artifactId>
-            <version>0.23.0</version>
+            <artifactId>java-otp</artifactId>
+            <version>0.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

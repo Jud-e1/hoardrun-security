@@ -31,7 +31,7 @@ public class TransactionController {
 
     @PostMapping("/submit")
     @PreAuthorize("hasRole('USER')")
-    public Map<String, Object> submit(@RequestBody TxRequest req, @AuthenticationPrincipal Jwt jwt) {
+    public Map<String, Object> submit(@jakarta.validation.Valid @RequestBody TxRequest req, @AuthenticationPrincipal Jwt jwt) {
         boolean mfaVerified = Boolean.TRUE.equals(jwt.getClaim("mfa_verified"));
         if (req.amount() > 1000 && !mfaVerified) {
             auditClient.emit("TX_MFA_REQUIRED", jwt.getSubject(), "{\"amount\":" + req.amount() + "}");

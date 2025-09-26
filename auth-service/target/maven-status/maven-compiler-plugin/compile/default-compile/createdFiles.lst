@@ -1,0 +1,14 @@
+com/hoardrun/auth/service/MfaService.class
+com/hoardrun/auth/AuthServiceApplication.class
+com/hoardrun/auth/web/MfaController$VerifyRequest.class
+com/hoardrun/auth/web/AuthController.class
+com/hoardrun/auth/web/MfaController$SetupRequest.class
+com/hoardrun/auth/domain/UserAccount.class
+com/hoardrun/auth/web/TokenController$RevokeRequest.class
+com/hoardrun/auth/repo/UserAccountRepository.class
+com/hoardrun/auth/web/TokenController$RefreshRequest.class
+com/hoardrun/auth/web/AuthController$RegisterRequest.class
+com/hoardrun/auth/web/TokenController.class
+com/hoardrun/auth/config/SecurityConfig.class
+com/hoardrun/auth/web/AuthController$LoginRequest.class
+com/hoardrun/auth/web/MfaController.class

@@ -1,0 +1,8 @@
+com/hoardrun/audit/AuditServiceApplication.class
+com/hoardrun/audit/repo/AuditEventRepository.class
+com/hoardrun/audit/web/AuditController.class
+com/hoardrun/audit/config/SecurityConfig.class
+com/hoardrun/audit/web/AuditIngestController.class
+com/hoardrun/audit/config/JwtConfig.class
+com/hoardrun/audit/domain/AuditEvent.class
+com/hoardrun/audit/web/AuditIngestController$IngestRequest.class

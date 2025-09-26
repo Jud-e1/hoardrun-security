@@ -14,7 +14,11 @@ public class MfaService {
     private final TimeBasedOneTimePasswordGenerator totp;
 
     public MfaService() {
-        this.totp = new TimeBasedOneTimePasswordGenerator(Duration.ofSeconds(30));
+        try {
+            this.totp = new TimeBasedOneTimePasswordGenerator(Duration.ofSeconds(30));
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("Failed to initialize TOTP generator", e);
+        }
     }
 
     public String generateBase32Secret() {

@@ -1,0 +1,8 @@
+/app/auth-service/src/main/java/com/hoardrun/auth/AuthServiceApplication.java
+/app/auth-service/src/main/java/com/hoardrun/auth/config/SecurityConfig.java
+/app/auth-service/src/main/java/com/hoardrun/auth/domain/UserAccount.java
+/app/auth-service/src/main/java/com/hoardrun/auth/repo/UserAccountRepository.java
+/app/auth-service/src/main/java/com/hoardrun/auth/service/MfaService.java
+/app/auth-service/src/main/java/com/hoardrun/auth/web/AuthController.java
+/app/auth-service/src/main/java/com/hoardrun/auth/web/MfaController.java
+/app/auth-service/src/main/java/com/hoardrun/auth/web/TokenController.java
